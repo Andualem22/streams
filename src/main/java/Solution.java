@@ -9,6 +9,7 @@ public class Solution {
         System.out.println(malesOnly(Person.persons()));
         names(Person.persons()).forEach(System.out::println);
         sortedByIncomeDesc().forEach(System.out::println);
+        System.out.println("Distinct genders " + distinctGenders());
 
     }
 
@@ -37,4 +38,15 @@ public class Solution {
 
         return sortedList;
     }
+
+    static List<Person.Gender> distinctGenders(){
+        List<Person.Gender> genders = Person.persons()
+                .stream()
+                .map(Person::getGender)
+                .distinct()
+                .toList();
+        return genders;
+    }
+
+
 }
