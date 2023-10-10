@@ -8,7 +8,7 @@ public class Solution {
 
         System.out.println(malesOnly(Person.persons()));
         names(Person.persons()).forEach(System.out::println);
-
+        sortedByIncomeDesc().forEach(System.out::println);
 
     }
 
@@ -27,5 +27,14 @@ public class Solution {
                 .map(Person::getName)
                 .toList();
         return names;
+    }
+
+    static List<Person> sortedByIncomeDesc(){
+        List<Person> sortedList = Person.persons()
+                .stream()
+                .sorted(Comparator.comparing(Person::getIncome).thenComparing(Person::getName))
+                .toList();
+
+        return sortedList;
     }
 }
