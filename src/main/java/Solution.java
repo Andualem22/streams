@@ -11,6 +11,9 @@ public class Solution {
         sortedByIncomeDesc().forEach(System.out::println);
         System.out.println("Distinct genders " + distinctGenders());
 
+        System.out.println("First three people on the list");
+        firstThreePeople().forEach(System.out::println);
+
     }
 
     // Filter the list of persons to include only males.
@@ -48,5 +51,11 @@ public class Solution {
         return genders;
     }
 
-
+    static List<Person> firstThreePeople(){
+        List<Person> top3 = Person.persons()
+                .stream()
+                .limit(3)
+                .toList();
+        return top3;
+    }
 }
