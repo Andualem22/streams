@@ -1,7 +1,4 @@
-import java.util.Comparator;
-import java.util.DoubleSummaryStatistics;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -35,6 +32,12 @@ public class Solution {
         System.out.println("calculating the sum, average, max and min of income " + incomeStats);
 
         System.out.println("Joining all the names into one string " + allNames);
+
+        System.out.println("To map person where the key is ID and value is the person " + idToPersonMap);
+
+        System.out.println("converting the list of persons to a set " + personSet);
+
+        System.out.println("To concatenate persons name by creating custom collector in another class " + concatenatedNames);
     }
 
     // Filter the list of persons to include only males.
@@ -147,4 +150,19 @@ public class Solution {
             .stream()
             .map(Person::getName)
             .collect(Collectors.joining(", "));
+    //to create a map of persons where the key is the ID and the value is the person
+    static Map<Long, Person> idToPersonMap = Person.persons()
+            .stream()
+            .collect(Collectors.toMap(Person::getId, person -> person));
+
+    //to convert the list of persons to a set
+    static Set<Person> personSet = Person.persons()
+            .stream()
+            .collect(Collectors.toSet());
+
+    //by creating a custom collector to concatenate all the names of all persons
+    static String concatenatedNames = Person.persons()
+            .stream()
+            .map(Person::getName)
+            .collect(CustomCollectors.concatenating());
 }
