@@ -1,6 +1,8 @@
 import java.util.Comparator;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -28,6 +30,11 @@ public class Solution {
             Person p = personWithHighIncome().get();
             System.out.println("Person with highest income is " + p);
         }
+        System.out.println("To find any person " + anyPerson);
+
+        System.out.println("calculating the sum, average, max and min of income " + incomeStats);
+
+        System.out.println("Joining all the names into one string " + allNames);
     }
 
     // Filter the list of persons to include only males.
@@ -125,4 +132,19 @@ public class Solution {
                 .stream()
                 .max(Comparator.comparingDouble(Person::getIncome));
     }
+    //to find any person in the list we can use findAny() terminal operation
+    static Optional<Person> anyPerson = Person.persons()
+            .stream()
+            .findAny();
+
+    //calculate the sum, average , max and min of incomes
+    static DoubleSummaryStatistics incomeStats = Person.persons()
+            .stream()
+            .collect(Collectors.summarizingDouble(Person::getIncome));
+
+    //join the names of all persons into a single string
+    static String allNames = Person.persons()
+            .stream()
+            .map(Person::getName)
+            .collect(Collectors.joining(", "));
 }
